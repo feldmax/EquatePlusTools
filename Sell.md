@@ -14,7 +14,7 @@ This document contains the extracted formulas and queries from the Google Sheet 
 Data Query: Retrieves the **Purchase Date (A)**, **Strike Price (€) (G)**, and **Available Quantity (M)** for all portfolio entries that are classified as 'shares'. The results are sorted by date.
 
     =QUERY(Portfolio,"select A,G,Mwhere (C = 'shares')order by A")
----
+
 
 <a id="column-b"></a>
 ## Column B
@@ -22,7 +22,7 @@ Data Query: Retrieves the **Purchase Date (A)**, **Strike Price (€) (G)**, and
 Header for the **'Strike price / Cost basis'** column (Value is the retrieved Strike Price from the QUERY in column A).
 
     Strike price / Cost basis
----
+
 
 <a id="column-c"></a>
 ## Column C
@@ -30,7 +30,7 @@ Header for the **'Strike price / Cost basis'** column (Value is the retrieved St
 Header for the **'Available quantity'** column (Value is the retrieved Available Quantity from the QUERY in column A).
 
     Available quantity
----
+
 
 <a id="column-d"></a>
 ## Column D
@@ -38,7 +38,7 @@ Header for the **'Available quantity'** column (Value is the retrieved Available
 Cumulative Available Shares: Calculates the **running total (cumulative sum)** of available shares in column C.
 
     ={"SUM of shares";ARRAYFORMULA(IF(ISBLANK($C2:$C),"",SUMIF(ROW($C$2:$C),"<="&ROW($C2:$C),$C$2:$C)))}
----
+
 
 ~~~
 ={"SUM of shares";
