@@ -40,6 +40,24 @@ Cumulative Available Shares: Calculates the **running total (cumulative sum)** o
     ={"SUM of shares";ARRAYFORMULA(IF(ISBLANK($C2:$C),"",SUMIF(ROW($C$2:$C),"<="&ROW($C2:$C),$C$2:$C)))}
 ---
 
+~~~
+={"SUM of shares";
+  ARRAYFORMULA(
+    IF(
+      ISBLANK($C2:$C), 
+      "", 
+      SUMIF(
+        ROW($C$2:$C), 
+        "<="&ROW($C2:$C), 
+        $C$2:$C
+      )
+    )
+  )
+}
+~~~
+
+---
+
 <a id="column-e"></a>
 ## Column E
 
