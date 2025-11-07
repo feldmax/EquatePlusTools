@@ -23,11 +23,12 @@ Data Query: Retrieves the **Purchase Date (A)**, **Strike Price (€) (G)**, and
 ~~~
 
 <a id="column-b"></a>
-### Column B
+## Column B
 
 Header for the **'Strike price / Cost basis'** column (Value is the retrieved Strike Price from the QUERY in column A).
 
     Strike price / Cost basis
+
 
 <a id="column-c"></a>
 ## Column C
@@ -36,10 +37,14 @@ Header for the **'Available quantity'** column (Value is the retrieved Available
 
     Available quantity
 
+
 <a id="column-d"></a>
 ## Column D
 
 Cumulative Available Shares: Calculates the **running total (cumulative sum)** of available shares in column C.
+
+    ={"SUM of shares";ARRAYFORMULA(IF(ISBLANK($C2:$C),"",SUMIF(ROW($C$2:$C),"<="&ROW($C2:$C),$C$2:$C)))}
+
 
 ~~~
 ={"SUM of shares";
@@ -57,56 +62,23 @@ Cumulative Available Shares: Calculates the **running total (cumulative sum)** o
 }
 ~~~
 
+---
+
 <a id="column-e"></a>
 ## Column E
 
 Shares to Sell (FIFO Logic): Calculates how many shares from the current lot (C) will be sold based on the total desired sale amount (`Status!$E$35`), applying the **First-In, First-Out (FIFO)** method.
 
-~~~
-={"Sell shares";
-  ARRAYFORMULA(
-    IF(
-      ISBLANK($C2:$C), 
-      "",
-      IF(
-        SUMIF(ROW($C$2:$C), "<="&ROW($C2:$C), $C$2:$C) <= Status!$E$35,
-        $C2:$C,
-        IF(
-          SUMIF(ROW($C$2:$C), "<"&ROW($C2:$C), $C$2:$C) >= Status!$E$35,
-          "",
-          Status!$E$35 - SUMIF(ROW($C$2:$C), "<"&ROW($C2:$C), $C$2:$C)
-        )
-      )
-    )
-  )
-}
-~~~
+    ={"Sell shares";ARRAYFORMULA(IF(ISBLANK($C2:$C),"",IF(SUMIF(ROW($C$2:$C), "<="&ROW($C2:$C), $C$2:$C) <= Status!$E$35,$C2:$C,IF(SUMIF(ROW($C$2:$C), "<"&ROW($C2:$C), $C$2:$C) >= Status!$E$35,"",Status!$E$35 - SUMIF(ROW($C$2:$C), "<"&ROW($C2:$C), $C$2:$C)))))}
+---
 
 <a id="column-h"></a>
 ## Column H
 
 Exchange Rate (Purchase Day): Fetches the **NIS/EUR exchange rate** on the purchase date (A) for each lot using `GOOGLEFINANCE`.
 
-~~~
-={"Exchange rate (purchase day)";
-  ARRAYFORMULA(
-    IF(
-      ($A2:$A="")+($F2:$F=""), 
-      "",
-      MAP(
-        $A2:$A, 
-        LAMBDA(date, 
-          INDEX(
-            GOOGLEFINANCE("CURRENCY:EURILS" ,"price",date),
-            2,
-            2
-          )
-        ) 
-      )
-    )
-  )
-}
-~~~
+    ={"Exchange rate (purchase day)";ARRAYFORMULA(IF(($A2:$A="")+($F2:$F=""),"",MAP($A2:$A,LAMBDA(date,INDEX(GOOGLEFINANCE("CURRENCY:EURILS" ,"price",date),2,2)))))}
+---
 
 <a id="column-i"></a>
 ## Column I
@@ -185,25 +157,8 @@ Profit Nominal (Target Rate): Calculates the nominal profit based on the target 
 
 Profit Nominal for Tax (Min/Max based on Sign): Determines the final nominal profit for tax purposes (R), comparing the two nominal profits (P and Q) based on their signs. If both signs are the same, it takes the smaller absolute value for gain or the larger absolute value for loss. If signs differ, profit is considered 0.
 
-~~~
-={"Profit nominal for tax"; 
-  ARRAYFORMULA(
-    IF(
-      ($A2:$A="")+($F2:$F=""), 
-      "",
-      IF(
-        SIGN($P2:$P)=SIGN($Q2:$Q),
-        IF(
-          $P2:$P>=0,
-          IF($P2:$P<$Q2:$Q, $P2:$P, $Q2:$Q), 
-          IF($P2:$P>$Q2:$Q, $P2:$P, $Q2:$Q)
-        ),
-        0
-      )
-    )
-  )
-}
-~~~
+    ={"Profit nominal for tax";ARRAYFORMULA(IF(($A2:$A="")+($F2:$F=""),"",IF(SIGN($P2:$P)=SIGN($Q2:$Q),IF($P2:$P>=0,IF($P2:$P<$Q2:$Q, $P2:$P, $Q2:$Q),IF($P2:$P>$Q2:$Q, $P2:$P, $Q2:$Q)),0)))}
+---
 
 <a id="column-s"></a>
 ## Column S
@@ -250,18 +205,4 @@ Net Amount to Bank in Israel: Calculates the **final cash amount received per lo
 
 Cumulative Net Amount to Bank: Calculates the **running total (cumulative sum)** of the 'Net amount to bank in Israel' (W).
 
-~~~
-={"SUM to bank in Israel"; 
-  ARRAYFORMULA(
-    IF(
-      ($A2:$A="")+($F2:$F=""), 
-      "", 
-      SUMIF(
-        ROW($W$2:$W), 
-        "<="&ROW($W2:$W), 
-        $W$2:$W
-      )
-    )
-  )
-}
-~~~
+    ={"SUM to bank in Israel";ARRAYFORMULA(IF(($A2:$A="")+($F2:$F=""),"",SUMIF(ROW($W$2:$W),"<="&ROW($W2:$W),$W$2:$W)))}
