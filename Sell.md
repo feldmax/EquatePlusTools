@@ -9,7 +9,7 @@ This document contains the extracted formulas and queries from the Google Sheet 
 ---
 
 <a id="column-a"></a>
-## Column A
+### Column A
 
 Data Query: Retrieves the **Purchase Date (A)**, **Strike Price (€) (G)**, and **Available Quantity (M)** for all portfolio entries that are classified as 'shares'. The results are sorted by date.
 
@@ -23,7 +23,7 @@ Data Query: Retrieves the **Purchase Date (A)**, **Strike Price (€) (G)**, and
 ~~~
 
 <a id="column-b"></a>
-## Column B
+### Column B
 
 Header for the **'Strike price / Cost basis'** column (Value is the retrieved Strike Price from the QUERY in column A).
 
@@ -32,7 +32,7 @@ Strike price / Cost basis
 ~~~
 
 <a id="column-c"></a>
-## Column C
+### Column C
 
 Header for the **'Available quantity'** column (Value is the retrieved Available Quantity from the QUERY in column A).
 
@@ -41,7 +41,7 @@ Available quantity
 ~~~
 
 <a id="column-d"></a>
-## Column D
+### Column D
 
 Cumulative Available Shares: Calculates the **running total (cumulative sum)** of available shares in column C.
 
@@ -62,7 +62,7 @@ Cumulative Available Shares: Calculates the **running total (cumulative sum)** o
 ~~~
 
 <a id="column-e"></a>
-## Column E
+### Column E
 
 Shares to Sell (FIFO Logic): Calculates how many shares from the current lot (C) will be sold based on the total desired sale amount (`Status!$E$35`), applying the **First-In, First-Out (FIFO)** method.
 
@@ -87,7 +87,7 @@ Shares to Sell (FIFO Logic): Calculates how many shares from the current lot (C)
 ~~~
 
 <a id="column-h"></a>
-## Column H
+### Column H
 
 Exchange Rate (Purchase Day): Fetches the **NIS/EUR exchange rate** on the purchase date (A) for each lot using `GOOGLEFINANCE`.
 
@@ -113,7 +113,7 @@ Exchange Rate (Purchase Day): Fetches the **NIS/EUR exchange rate** on the purch
 ~~~
 
 <a id="column-i"></a>
-## Column I
+### Column I
 
 Exchange Rate (Target): Retrieves the user-defined **expected exchange rate (NIS/EUR)** from a reference cell on the 'Status' sheet (`Status!$E$29`).
 
@@ -122,7 +122,7 @@ Exchange Rate (Target): Retrieves the user-defined **expected exchange rate (NIS
 ~~~
 
 <a id="column-j"></a>
-## Column J
+### Column J
 
 Share Price (Target): Retrieves the user-defined **expected share price (€)** for the sale from a reference cell on the 'Status' sheet (`Status!$E$28`).
 
@@ -131,7 +131,7 @@ Share Price (Target): Retrieves the user-defined **expected share price (€)** 
 ~~~
 
 <a id="column-k"></a>
-## Column K
+### Column K
 
 Allocated Euro (Purchase Day): Calculates the **original cost in Euros** for the shares sold from this lot: Strike Price (€) (B) * Sell Shares (F).
 
@@ -140,7 +140,7 @@ Allocated Euro (Purchase Day): Calculates the **original cost in Euros** for the
 ~~~
 
 <a id="column-l"></a>
-## Column L
+### Column L
 
 Allocated NIS (Purchase Day): Calculates the **original cost in Shekels (NIS)** for the shares sold using the exchange rate on the purchase day (K * H). This is the basis for tax calculation.
 
@@ -149,7 +149,7 @@ Allocated NIS (Purchase Day): Calculates the **original cost in Shekels (NIS)** 
 ~~~
 
 <a id="column-m"></a>
-## Column M
+### Column M
 
 Allocated NIS (Target Rate): Calculates the original cost in Shekels (NIS) for the shares sold using the target exchange rate (K * I). Used for tracking purposes.
 
@@ -158,7 +158,7 @@ Allocated NIS (Target Rate): Calculates the original cost in Shekels (NIS) for t
 ~~~
 
 <a id="column-n"></a>
-## Column N
+### Column N
 
 Target Sale Value Euro: Calculates the **gross sales proceeds in Euros**: Shares to Sell (F) * Target Share Price (€) (J).
 
@@ -167,7 +167,7 @@ Target Sale Value Euro: Calculates the **gross sales proceeds in Euros**: Shares
 ~~~
 
 <a id="column-o"></a>
-## Column O
+### Column O
 
 Target Sale Value NIS: Calculates the **gross sales proceeds in Shekels (NIS)** using the target exchange rate: Target Sale Value Euro (N) * Target Exchange Rate (I).
 
@@ -176,7 +176,7 @@ Target Sale Value NIS: Calculates the **gross sales proceeds in Shekels (NIS)** 
 ~~~
 
 <a id="column-p"></a>
-## Column P
+### Column P
 
 Profit Nominal (Purchase Day Rate): Calculates the **nominal profit** based on the purchase day exchange rate: Target Sale Value NIS (O) - Allocated NIS (Purchase Day) (L). This is the **primary tax profit calculation**.
 
@@ -185,7 +185,7 @@ Profit Nominal (Purchase Day Rate): Calculates the **nominal profit** based on t
 ~~~
 
 <a id="column-q"></a>
-## Column Q
+### Column Q
 
 Profit Nominal (Target Rate): Calculates the nominal profit based on the target exchange rate: Target Sale Value NIS (O) - Allocated NIS (Target Rate) (M). Used for tracking purposes.
 
@@ -194,7 +194,7 @@ Profit Nominal (Target Rate): Calculates the nominal profit based on the target 
 ~~~
 
 <a id="column-r"></a>
-## Column R
+### Column R
 
 Profit Nominal for Tax (Min/Max based on Sign): Determines the final nominal profit for tax purposes (R), comparing the two nominal profits (P and Q) based on their signs. If both signs are the same, it takes the smaller absolute value for gain or the larger absolute value for loss. If signs differ, profit is considered 0.
 
@@ -219,7 +219,7 @@ Profit Nominal for Tax (Min/Max based on Sign): Determines the final nominal pro
 ~~~
 
 <a id="column-s"></a>
-## Column S
+### Column S
 
 Target Sales Fees: Calculates the **total EquatePlus fees** (transaction + exchange) based on the total target sale value in NIS: Target Sale Value NIS (O) * (Transaction Fee + Exchange Fee).
 
@@ -228,7 +228,7 @@ Target Sales Fees: Calculates the **total EquatePlus fees** (transaction + excha
 ~~~
 
 <a id="column-t"></a>
-## Column T
+### Column T
 
 Profit for Tax (Real): Calculates the **taxable profit** after deducting the fees from the Nominal Profit for Tax: Profit Nominal for Tax (R) - Target Sales Fees (S).
 
@@ -237,7 +237,7 @@ Profit for Tax (Real): Calculates the **taxable profit** after deducting the fee
 ~~~
 
 <a id="column-u"></a>
-## Column U
+### Column U
 
 Tax 25%: Calculates the **25% capital gains tax** on the Profit for Tax (Real) (T).
 
@@ -246,7 +246,7 @@ Tax 25%: Calculates the **25% capital gains tax** on the Profit for Tax (Real) (
 ~~~
 
 <a id="column-v"></a>
-## Column V
+### Column V
 
 Profit Netto (After Tax): Calculates the **net profit** (75% of the real profit for tax): Profit for Tax (Real) (T) * 75%.
 
@@ -255,7 +255,7 @@ Profit Netto (After Tax): Calculates the **net profit** (75% of the real profit 
 ~~~
 
 <a id="column-w"></a>
-## Column W
+### Column W
 
 Net Amount to Bank in Israel: Calculates the **final cash amount received per lot**: Target Sale Value NIS (O) - Target Sales Fees (S) - Tax 25% (U).
 
@@ -264,7 +264,7 @@ Net Amount to Bank in Israel: Calculates the **final cash amount received per lo
 ~~~
 
 <a id="column-y"></a>
-## Column Y
+### Column Y
 
 Cumulative Net Amount to Bank: Calculates the **running total (cumulative sum)** of the 'Net amount to bank in Israel' (W).
 
