@@ -1,5 +1,11 @@
 # Sheet 'Status' 
 
+---
+
+This document contains extracted calculation formulas from the Google Sheet tab **'Status'**, detailing the summary calculation logic for stock sales, profits, and taxes.
+
+---
+
 ## General data
 
 ### Row: 5 cells: B-E
