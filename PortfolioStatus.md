@@ -21,7 +21,6 @@ The application achieves three main objectives:
 | **Shares** | Calculation | Performs detailed, per-lot calculations for the entire portfolio (cost basis, current value, nominal profit, APR). |
 | **Sell** | Calculation | Executes the complex calculations for the sale simulation based on the FIFO (First-In, First-Out) method, determining the cost basis and tax liability for the specific shares being sold. |
 | **Status** | Dashboard/Output | Displays the summarized results, visual charts, and serves as the primary input area for the sale simulation. |
-| **Activity/ActivitySplit** | Data Processing | (Script-driven) Used to clean and structure transaction data for accurate FIFO calculations. |
 
 ---
 
@@ -51,12 +50,3 @@ The application achieves three main objectives:
 **The main goal of the simulation is to accurately calculate the transactional expenses and the exact capital gains tax liability, providing the user with the true net profit remaining after all deductions.**
 
 ---
-
-### 💻 Embedded Google Apps Script Functionality
-
-The application includes an integrated Google Apps Script to manage transaction data:
-
-* **Purpose:** To generate the `ActivitySplit` table from the raw `Activity` data, applying the **FIFO (First-In, First-Out)** cost basis tracking logic to correctly link sold shares to their original purchase lots.
-* **Trigger:**
-    * **Automatic:** Triggered when the `Activity List SAP` sheet is edited.
-    * **Manual:** Can be run manually (e.g., via a custom button on the `Status` sheet or from the Apps Script console) to force an update.
