@@ -1,6 +1,6 @@
-# TaxCalculator.md
+# 💰 Portfolio Taxes
 
-# 💰 EquatePlus Stock Sale Tax Calculator (Historical Transactions)
+# EquatePlus Stock Sale Tax Calculator (Historical Transactions)
 
 ## 🎯 Purpose and Functionality
 

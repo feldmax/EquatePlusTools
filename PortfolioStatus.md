@@ -1,5 +1,6 @@
+# 📈 Portfolio Status
 
-# 📈 PortfolioStatus - EquatePlus Stock Sale Simulation and Portfolio Status Tracker
+# EquatePlus Stock Sale Simulation and Portfolio Status Tracker
 
 ## 🎯 Purpose and Functionality
 
