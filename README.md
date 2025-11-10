@@ -71,6 +71,7 @@ To ensure the highest tax calculation accuracy in the **Portfolio Taxes** tool, 
     * If your Excel `PortfolioDetails` file uses a format like Hebrew or Arabic, you may need to convert the **"Allocation Date"** entries to the English GB format (`dd-mmm-yyyy`) *before* copying them to the Google Sheet.
     * To fix this in Excel: Select column A, right-click, choose "Format Cells," select `Number > Custom`, and set type to: `[$-en-GB]d mmm yyyy;@`.
 * **Tax Calculation Basis:**
-    * Profit and tax calculations are based on the rules applicable to **foreign securities** in Israel (Мисуй нииро́т э́рэх зари́м).
+    * Profit and tax calculations are based on the rules applicable to **foreign securities** in Israel [מיסוי ניירות ערך זרים](https://moneyplan.co.il/%D7%9E%D7%99%D7%A1%D7%95%D7%99-%D7%A0%D7%99%D7%99%D7%A8%D7%95%D7%AA-%D7%A2%D7%A8%D7%9A-%D7%96%D7%A8%D7%99%D7%9D/).
     * Taxes are calculated after deducting EquatePlus transaction costs, including the cost of converting euros to shekels. If you plan to transfer funds to an Israeli bank in euros without conversion, set the EquatePlus exchange fee calculation field (yellow cell on the Status page) to **0%**.
 * **Tax Optimization Window:** When selling shares, you must declare the income received no later than the first quarter of the following calendar year, providing an opportunity for tax optimization (e.g., deducting losses from other sales).
+
